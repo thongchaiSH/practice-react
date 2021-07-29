@@ -6,7 +6,7 @@ const Item = (props) => {
   const symbol=amount<0? "-": "+";
   return (
     <li className={status}>
-      {title} {status} <span>{symbol}{Math.abs(amount)}</span>
+      {title} <span>{symbol}{Math.abs(amount)}</span>
     </li>
   );
 };

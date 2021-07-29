@@ -24,3 +24,7 @@ input:focus{
     margin: 10px 0 30px;
     width: 100%;
 }
+
+.btn:disabled {
+    cursor: not-allowed;
+}

@@ -1,12 +1,13 @@
 import './FormComponent.css'
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import {v4 as uuid} from 'uuid';
 
 const FormComponent =(props)=>{
-
+    // console.log("Render Form Component...");
     //state
     const [title, setTitle] = useState('');
     const [amount,setAmount]=useState(0);
+    const [formValid,setFormValid]=useState(false);
 
     const inputTitle=(event)=>{
         setTitle(event.target.value);
@@ -29,9 +30,15 @@ const FormComponent =(props)=>{
         props.onAddItem(itemData); 
         setTitle('');
         setAmount(0);
+        setFormValid(false);
         
     }
 
+    useEffect(()=>{
+        // console.log("Call useEffect");
+        const isValid=title.trim().length>0 && amount!=0;
+        setFormValid(isValid);
+    },[amount,title])
     return(
         <div>
             <form onSubmit={saveItem}>
@@ -46,7 +53,7 @@ const FormComponent =(props)=>{
                 </div>
 
                 <div>
-                    <button type="submit" className="btn">เพิ่มข้อมูล</button>
+                    <button type="submit" className="btn" disabled={!formValid}>เพิ่มข้อมูล</button>
                 </div>
             </form>
         </div>
